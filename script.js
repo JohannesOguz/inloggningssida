@@ -37,9 +37,9 @@ function createLoginForm() {
   form.appendChild(loginButton);
 
   root.appendChild(form);
-}
 
-createLoginForm();
+  document.getElementById("loginButton").addEventListener("click", handleLogin);
+}
 
 const correctUsername = "test";
 const correctPassword = "1234";
@@ -54,6 +54,8 @@ const handleLogin = () => {
     showError();
   }
 };
+
+createLoginForm();
 
 document.getElementById("loginButton").addEventListener("click", handleLogin);
 
