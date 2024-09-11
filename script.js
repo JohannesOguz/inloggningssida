@@ -1,6 +1,8 @@
 function createLoginForm() {
   const root = document.getElementById("root");
 
+  root.innerHTML = "";
+
   const form = document.createElement("form");
 
   const logo = document.createElement("h1");
@@ -38,3 +40,60 @@ function createLoginForm() {
 }
 
 createLoginForm();
+
+const correctUsername = "test";
+const correctPassword = "1234";
+
+const handleLogin = () => {
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+
+  if (username === correctUsername && password === correctPassword) {
+    showWelcome();
+  } else {
+    showError();
+  }
+};
+
+document.getElementById("loginButton").addEventListener("click", handleLogin);
+
+function showWelcome() {
+  const root = document.getElementById("root");
+
+  root.innerHTML = "";
+
+  const welcomeContainer = document.createElement("div");
+
+  const welcomeText = document.createElement("h1");
+  welcomeText.textContent = "Välkommen, lyckad inloggning! ";
+
+  welcomeContainer.appendChild(welcomeText);
+
+  const logoutButton = document.createElement("button");
+  logoutButton.textContent = "Logga ut";
+  logoutButton.addEventListener("click", createLoginForm);
+
+  welcomeContainer.appendChild(logoutButton);
+
+  root.appendChild(welcomeContainer);
+}
+
+function showError() {
+  const root = document.getElementById("root");
+
+  root.innerHTML = "";
+
+  const errorContainer = document.createElement("div");
+
+  const errorText = document.createElement("h1");
+  errorText.textContent = "Fel användarnamn eller lösenord! ";
+
+  errorContainer.appendChild(errorText);
+
+  const tryAgainButton = document.createElement("button");
+  tryAgainButton.textContent = "Försök igen";
+  tryAgainButton.addEventListener("click", createLoginForm);
+
+  errorContainer.appendChild(tryAgainButton);
+  root.appendChild(errorContainer);
+}
