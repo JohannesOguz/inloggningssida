@@ -49,6 +49,7 @@ const handleLogin = () => {
   const password = document.getElementById("password").value;
 
   if (username === correctUsername && password === correctPassword) {
+    localStorage.setItem("isLoggedIn", "true");
     showWelcome();
   } else {
     showError();
@@ -73,7 +74,7 @@ function showWelcome() {
 
   const logoutButton = document.createElement("button");
   logoutButton.textContent = "Logga ut";
-  logoutButton.addEventListener("click", createLoginForm);
+  logoutButton.addEventListener("click", handleLogout);
 
   welcomeContainer.appendChild(logoutButton);
 
@@ -99,3 +100,19 @@ function showError() {
   errorContainer.appendChild(tryAgainButton);
   root.appendChild(errorContainer);
 }
+
+function handleLogout() {
+  localStorage.removeItem("isLoggedIn");
+
+  createLoginForm();
+}
+
+window.onload = function () {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
+
+  if (isLoggedIn === "true") {
+    showWelcome();
+  } else {
+    createLoginForm();
+  }
+};
